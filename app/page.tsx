@@ -1,12 +1,8 @@
-export default function Home() {
-  return (
-    <main className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold text-primary mb-4">GingXR Nexus</h1>
-        <p className="text-muted-foreground">
-          Internal Company Operating System
-        </p>
-      </div>
-    </main>
-  );
+import { redirect } from "next/navigation";
+import { getCurrentUser } from "@/lib/supabase-auth";
+
+export default async function Home() {
+  const user = await getCurrentUser();
+  if (user) redirect("/crm");
+  redirect("/login");
 }

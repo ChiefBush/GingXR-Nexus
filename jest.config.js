@@ -1,14 +1,15 @@
 /** @type {import('jest').Config} */
-const config = {
-  testEnvironment: "jsdom",
-  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
+module.exports = {
+  preset: "ts-jest",
+  testEnvironment: "node",
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/$1",
   },
   transform: {
-    "^.+\\.tsx?$": "ts-jest",
+    "^.+\\.tsx?$": [
+      "ts-jest",
+      { tsconfig: { jsx: "react-jsx", esModuleInterop: true, module: "commonjs" } },
+    ],
   },
-  testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/.next/"],
+  testPathIgnorePatterns: ["/node_modules/", "/.next/"],
 };
-
-module.exports = config;
